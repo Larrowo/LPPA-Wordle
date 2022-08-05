@@ -1,3 +1,5 @@
+/* *GENERAL STYLING */
+
 *,
 *::after,
 *::before {
@@ -16,50 +18,78 @@ body {
   font-size: clamp(0.5rem, 2.5vmin, 1.5rem);
 }
 
-main{
+main {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-
 /* *HEADER */
-header{
-    width: 100%;
-    display: flex;
-    justify-content: center;
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-header p{
-  color:white;
+header p {
+  color: white;
 }
 
 /* *WORDS GRID */
 
-.grid{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 2em;
+.grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2em;
 }
 
-.words-row{
- display: flex;   
- flex-direction: row;
+.words-row {
+  display: flex;
+  flex-direction: row;
 }
 
-.tile{
-    border: 1px solid #353535;
-    width: 3em;
-    height: 3em;
-    margin: 0.1em;
+.tile {
+  color: #ffffff;
+  border: 0.05px solid #39393c;
+  width: 2em;
+  height: 2em;
+  margin: 0.1em;
+  font-size: 2em;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  text-transform: uppercase;
+}
+
+/* Tile state */
+
+.tile[data-state="active"] {
+  border-color: #565758;
+}
+
+.tile[data-state="wrong"] {
+  border: none;
+  background-color: hsl(240, 2%, 23%);
+}
+
+.tile[data-state="wrong-location"] {
+  border: none;
+  background-color: hsl(49, 51%, 47%);
+}
+
+.tile[data-state="correct"] {
+  border: none;
+  background-color: hsl(115, 29%, 43%);
 }
 
 /* *KEYBOARD */
 
 .keyboard {
-    width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,9 +97,8 @@ header p{
 }
 
 .keyboard-row {
-    display:flex;
-    /* gap: 0.25em; */
-    margin-bottom: 0.4em;
+  display: flex;
+  margin-bottom: 0.4em;
 }
 
 .key {
@@ -78,19 +107,46 @@ header p{
   margin: 0px 3px;
   padding: 0.8em;
   width: 2.7em;
-    height: 2.7em;
+  height: 2.8em;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #818283;
+  background-color: hsl(
+    var(--hue, 200),
+    var(--saturation, 1%),
+    calc(var(--lightness-offset, 0%) + var(--lightness, 51%))
+  );
   color: #ffffff;
   fill: #ffffff;
   text-transform: uppercase;
   user-select: none;
   cursor: pointer;
+  border-radius: 0.25em;
 }
 
-.key.large{
-  width: 4.20em;
+.key.large {
+  width: 4.2em;
 }
 
+.key:hover,
+.key:focus {
+  --lightness-offset: 10%;
+}
+
+/* wrong letter */
+.key.wrong {
+  --lightness: 23%;
+}
+
+/* wrong letter location */
+.key.wrong-location {
+  --hue: 49;
+  --saturation: 51%;
+  --lightness: 47%;
+}
+/* correct letter location */
+.key.correct {
+  --hue: 115;
+  --saturation: 29%;
+  --lightness: 43%;
+}

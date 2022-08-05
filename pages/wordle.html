@@ -7,7 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/wordle.css" />
-    <script src="/wordle.js" defer></script>
+    <script type="module" src="/scripts/wordle.js" defer></script>
   </head>
 
   <body>
@@ -18,7 +18,7 @@
     </header>
     <main>
       <!-- Game grid -->
-      <div class="grid">
+      <div data-guess-grid class="grid">
         <div class="words-row">
           <div class="tile"></div>
           <div class="tile"></div>
