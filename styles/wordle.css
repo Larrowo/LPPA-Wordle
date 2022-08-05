@@ -9,18 +9,29 @@ body {
   background-color: #111112;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   min-height: 100vh;
   margin: 0;
   padding: 1em;
   font-size: clamp(0.5rem, 2.5vmin, 1.5rem);
-  background-color: #be9595;
 }
+
+main{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 
 /* *HEADER */
 header{
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+header p{
+  color:white;
 }
 
 /* *WORDS GRID */
@@ -30,6 +41,7 @@ header{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 2em;
 }
 
 .words-row{
@@ -39,11 +51,10 @@ header{
 
 .tile{
     border: 1px solid #353535;
-    width: 1em;
-    height: 1em;
+    width: 3em;
+    height: 3em;
+    margin: 0.1em;
 }
-
-
 
 /* *KEYBOARD */
 
@@ -57,14 +68,29 @@ header{
 
 .keyboard-row {
     display:flex;
-    gap: 0.25em;
+    /* gap: 0.25em; */
+    margin-bottom: 0.4em;
 }
 
 .key {
   font-size: inherit;
-  border: none;
-  padding: 0;
+  border: 1px;
+  margin: 0px 3px;
+  padding: 0.8em;
+  width: 2.7em;
+    height: 2.7em;
   display: flex;
   justify-content: center;
+  align-items: center;
+  background-color: #818283;
+  color: #ffffff;
+  fill: #ffffff;
+  text-transform: uppercase;
+  user-select: none;
   cursor: pointer;
 }
+
+.key.large{
+  width: 4.20em;
+}
+
