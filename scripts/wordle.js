@@ -3,6 +3,7 @@ import PALABRAS from "/palabras.json" assert { type: "json" };
 
 const WORD_LENGTH = 5;
 const FLIP_ANIMATION_DURATION = 500;
+const DANCE_ANIMATION_DURATION = 500;
 const targetWord = PALABRAS[Math.floor(Math.random() * PALABRAS.length)];
 console.log(targetWord);
 const guessGrid = document.querySelector("[data-guess-grid]");
@@ -62,7 +63,7 @@ function handleClick(e) {
  *
  */
 function handlePress(e) {
-  if (e.key.match(/^[a-z]$/)) {
+  if (e.key.match(/^[a-zA-Z]$/)) {
     pressKey(e.key);
     return;
   }
@@ -163,9 +164,14 @@ function flipTiles(tile, index, array, guess) {
     }
 
     if (index === array.length - 1) {
-      tile.addEventListener("transitionend", () => {
-        startInteraction();
-      });
+      tile.addEventListener(
+        "transitionend",
+        () => {
+          startInteraction();
+          checkWinLose(guess, array);
+        },
+        { once: true }
+      );
     }
   });
 }
@@ -180,6 +186,40 @@ function shakeTiles(tiles) {
       },
       { once: true }
     );
+  });
+}
+
+function checkWinLose(guess, tiles) {
+  if (guess === targetWord) {
+    showAlert("¡You win!", 5000);
+    danceTiles(tiles);
+    stopInteraction();
+    return;
+  }
+
+  const remainingTiles = guessGrid.querySelectorAll(
+    ":not(.words-row):not([data-letter])"
+  );
+  console.log(remainingTiles);
+  if (remainingTiles.length === 0) {
+    showAlert("FRACASADO DEL ORTO", null);
+    showAlert("The word was" + targetWord.toUpperCase(), null);
+    stopInteraction();
+  }
+}
+
+function danceTiles(tiles) {
+  tiles.forEach((tile, index) => {
+    setTimeout(() => {
+      tile.classList.add("dance");
+      tile.addEventListener(
+        "animationend",
+        () => {
+          tile.classList.remove("dance");
+        },
+        { once: true }
+      );
+    }, (index * DANCE_ANIMATION_DURATION) / 5);
   });
 }
 

@@ -104,6 +104,10 @@ header p {
   animation: shake 250ms ease-in-out;
 }
 
+.tile.dance {
+  animation: dance 500ms ease-in-out;
+}
+
 @keyframes shake {
   10% {
     transform: translate(-5%);
@@ -120,6 +124,28 @@ header p {
 
   90% {
     transform: translate(5%);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes dance {
+  20% {
+    transform: translateY(-50%);
+  }
+  40% {
+    transform: translateY(5%);
+  }
+  60% {
+    transform: translate(-25%);
+  }
+  80% {
+    transform: translate(2.5%);
+  }
+
+  90% {
+    transform: translate(-5%);
   }
   100% {
     transform: translate(0);
