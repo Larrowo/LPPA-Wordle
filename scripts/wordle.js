@@ -2,16 +2,17 @@
 import PALABRAS from "/palabras.json" assert { type: "json" };
 
 const WORD_LENGTH = 5;
+const FLIP_ANIMATION_DURATION = 500;
 const targetWord = PALABRAS[Math.floor(Math.random() * PALABRAS.length)];
 console.log(targetWord);
 const guessGrid = document.querySelector("[data-guess-grid]");
 const alertContainer = document.querySelector("[data-alert-container]");
-
+const keyboard = document.querySelector("[data-keyboard]");
 startInteraction();
 
 /**
  * Starts the interaction with the game by adding
- * event listeners from click and keydown
+ * event listeners for click and keydown
  */
 function startInteraction() {
   document.addEventListener("click", handleClick);
@@ -143,7 +144,30 @@ function showAlert(message, duration = 1000) {
 
 function flipTiles(tile, index, array, guess) {
   const letter = tile.dataset.letter;
-  const key = keyboard.querySelector('[data-key="${letter}]');
+  const key = keyboard.querySelector(`[data-key="${letter}"i]`);
+  setTimeout(() => {
+    tile.classList.add("flip");
+  }, (index * FLIP_ANIMATION_DURATION) / 2);
+
+  tile.addEventListener("transitionend", () => {
+    tile.classList.remove("flip");
+    if (targetWord[index] === letter) {
+      tile.dataset.state = "correct";
+      key.classList.add("correct");
+    } else if (targetWord.includes(letter)) {
+      tile.dataset.state = "wrong-location";
+      key.classList.add("wrong-location");
+    } else {
+      tile.dataset.state = "wrong";
+      key.classList.add("wrong");
+    }
+
+    if (index === array.length - 1) {
+      tile.addEventListener("transitionend", () => {
+        startInteraction();
+      });
+    }
+  });
 }
 
 function shakeTiles(tiles) {

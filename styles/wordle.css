@@ -93,6 +93,11 @@ header p {
   align-items: center;
   user-select: none;
   text-transform: uppercase;
+  transition: transform 250ms linear;
+}
+
+.tile.flip {
+  transform: rotateX(90deg);
 }
 
 .tile.shake {

@@ -7,7 +7,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/wordle.css" />
-    <script type="module" src="/scripts/wordle.js" defer></script>
   </head>
 
   <body>
@@ -65,7 +64,7 @@
       </div>
 
       <!-- Keyboard -->
-      <div class="keyboard">
+      <div data-keyboard class="keyboard">
         <!-- FIRST ROW OF KEYS -->
         <div class="keyboard-row">
           <button class="key" data-key="Q">Q</button>
@@ -119,5 +118,6 @@
       </div>
     </main>
     <footer></footer>
+    <script type="module" src="/scripts/wordle.js" defer></script>
   </body>
 </html>
