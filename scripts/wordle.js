@@ -11,6 +11,7 @@ const DANCE_ANIMATION_DURATION = 500;
 
 const targetWord = getRandomWord();
 console.log(targetWord);
+// Get elements from DOM
 const guessGrid = document.querySelector("[data-guess-grid]");
 const alertContainer = document.querySelector("[data-alert-container]");
 const keyboard = document.querySelector("[data-keyboard]");
@@ -205,6 +206,7 @@ function shakeTiles(tiles) {
 function checkWinLose(guess, tiles) {
   if (guess === targetWord) {
     showAlert("¡You win!", 5000);
+    stopTimer();
     danceTiles(tiles);
     stopInteraction();
     return;

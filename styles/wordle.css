@@ -78,6 +78,16 @@ header p {
   font-family: "Roboto Mono", monospace;
 }
 
+/* *PLAYERNAME */
+
+.playerName {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2em;
+  font-family: "Roboto Mono", monospace;
+}
 /* *WORDS GRID */
 
 .grid {
