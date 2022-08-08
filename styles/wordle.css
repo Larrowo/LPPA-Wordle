@@ -1,0 +1,262 @@
+/* *GENERAL STYLING */
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  font-family: arial;
+}
+
+body {
+  background-color: #111112;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  margin: 0;
+  padding: 1em;
+  font-size: clamp(0.5rem, 2.5vmin, 1.5rem);
+  /* overflow: hidden; */
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/* *HEADER */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+header p {
+  color: white;
+}
+
+/* *ALERT */
+.alert-container {
+  position: fixed;
+  top: 10vh;
+  left: 50vw;
+  transform: translate(-50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.alert {
+  pointer-events: none;
+  background-color: hsl(204, 7%, 85%);
+  padding: 0.75em;
+  border-radius: 0.25em;
+  opacity: 1;
+  transition: opacity 500ms ease-in-out;
+  margin-bottom: 0.5em;
+}
+
+.alert:last-child {
+  margin-bottom: 0;
+}
+
+.alert.hide {
+  opacity: 0;
+}
+
+/* *STOPWATCH */
+
+.stopwatch {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2em;
+  font-family: "Roboto Mono", monospace;
+}
+
+/* *PLAYERNAME */
+
+.playerName {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2em;
+  font-family: "Roboto Mono", monospace;
+}
+/* *WORDS GRID */
+
+.grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.words-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.tile {
+  color: #ffffff;
+  border: 0.05px solid #39393c;
+  width: 2em;
+  height: 2em;
+  margin: 0.1em;
+  font-size: 2em;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  text-transform: uppercase;
+  transition: transform 250ms linear;
+}
+
+.tile.flip {
+  transform: rotateX(90deg);
+}
+
+.tile.shake {
+  animation: shake 250ms ease-in-out;
+}
+
+.tile.dance {
+  animation: dance 500ms ease-in-out;
+}
+
+@keyframes shake {
+  10% {
+    transform: translate(-5%);
+  }
+  30% {
+    transform: translate(5%);
+  }
+  50% {
+    transform: translate(-7.5%);
+  }
+  70% {
+    transform: translate(7.5%);
+  }
+
+  90% {
+    transform: translate(5%);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes dance {
+  20% {
+    transform: translateY(-50%);
+  }
+  40% {
+    transform: translateY(5%);
+  }
+  60% {
+    transform: translate(-25%);
+  }
+  80% {
+    transform: translate(2.5%);
+  }
+
+  90% {
+    transform: translate(-5%);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* Tile state */
+
+.tile[data-state="active"] {
+  border-color: #565758;
+}
+
+.tile[data-state="wrong"] {
+  border: none;
+  background-color: hsl(240, 2%, 23%);
+}
+
+.tile[data-state="wrong-location"] {
+  border: none;
+  background-color: hsl(49, 51%, 47%);
+}
+
+.tile[data-state="correct"] {
+  border: none;
+  background-color: hsl(115, 29%, 43%);
+}
+
+/* *KEYBOARD */
+
+.keyboard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.keyboard-row {
+  display: flex;
+  margin-bottom: 0.4em;
+}
+
+.key {
+  font-size: inherit;
+  border: 1px;
+  margin: 0px 3px;
+  padding: 0.8em;
+  width: 2.7em;
+  height: 2.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(
+    var(--hue, 200),
+    var(--saturation, 1%),
+    calc(var(--lightness-offset, 0%) + var(--lightness, 51%))
+  );
+  color: #ffffff;
+  fill: #ffffff;
+  text-transform: uppercase;
+  user-select: none;
+  cursor: pointer;
+  border-radius: 0.25em;
+}
+
+.key.large {
+  width: 4.2em;
+}
+
+.key:hover,
+.key:focus {
+  --lightness-offset: 10%;
+}
+
+/* wrong letter */
+.key.wrong {
+  --lightness: 23%;
+}
+
+/* wrong letter location */
+.key.wrong-location {
+  --hue: 49;
+  --saturation: 51%;
+  --lightness: 47%;
+}
+/* correct letter location */
+.key.correct {
+  --hue: 115;
+  --saturation: 29%;
+  --lightness: 43%;
+}
