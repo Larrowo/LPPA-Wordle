@@ -9,15 +9,25 @@ const WORD_LENGTH = 5;
 const FLIP_ANIMATION_DURATION = 500;
 const DANCE_ANIMATION_DURATION = 500;
 
-const targetWord = getRandomWord();
+export const targetWord = getRandomWord();
 console.log(targetWord);
 // Get elements from DOM
 const guessGrid = document.querySelector("[data-guess-grid]");
 const alertContainer = document.querySelector("[data-alert-container]");
 const keyboard = document.querySelector("[data-keyboard]");
+const playerName = document.querySelector("[data-player-name]");
 
 startInteraction();
 startTimer();
+setPlayerName();
+
+/**
+ * Sets the player name that's saved in
+ * the localStorage
+ */
+function setPlayerName() {
+  playerName.innerHTML = localStorage.userName.toUpperCase();
+}
 
 /**
  * Starts the interaction with the game by adding
@@ -66,9 +76,6 @@ function handleClick(e) {
  * This function determines what happens
  * when the user presses a key
  * on the keyboard
- * TODO: Check if this works with the "if" statement for keys between
- * TODO: a-z is at the top if the function
- *
  */
 function handlePress(e) {
   if (e.key.match(/^[a-zA-Z]$/)) {
@@ -140,7 +147,7 @@ function submitGuess() {
 }
 
 //TODO: ADD COMMENTS
-function showAlert(message, duration = 1000) {
+export function showAlert(message, duration = 1000) {
   const alert = document.createElement("div");
   alert.textContent = message;
   alert.classList.add("alert");
@@ -189,7 +196,7 @@ function flipTiles(tile, index, array, guess) {
 }
 
 //TODO: ADD COMMENTS
-function shakeTiles(tiles) {
+export function shakeTiles(tiles) {
   tiles.forEach((tile) => {
     tile.classList.add("shake");
     tile.addEventListener(
@@ -215,7 +222,7 @@ function checkWinLose(guess, tiles) {
   const remainingTiles = guessGrid.querySelectorAll(
     ":not(.words-row):not([data-letter])"
   );
-  console.log(remainingTiles);
+  // console.log(remainingTiles);
   if (remainingTiles.length === 0) {
     showAlert("FRACASADO DEL ORTO", null);
     showAlert("The word was " + targetWord.toUpperCase(), null);

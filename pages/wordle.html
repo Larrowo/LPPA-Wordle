@@ -12,12 +12,13 @@
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/wordle.css" />
     <script type="module" src="/scripts/stopwatch.js" defer></script>
+    <script type="module" src="/scripts/saveGame.js"></script>
   </head>
 
   <body>
     <header>
       <div>
-        <p>TESTING</p>
+        <p>WORDLE</p>
       </div>
     </header>
     <main>
@@ -74,7 +75,15 @@
           <div class="tile"></div>
         </div>
       </div>
+      <!-- Save Button -->
+      <div class="saveButton-container">
+        <button data-save-button class="saveButton">SAVE GAME</button>
+      </div>
 
+      <!-- LOAD BUTTON TEST -->
+      <div class="loadButton-container">
+        <button data-load-button class="saveButton">LOAD GAME</button>
+      </div>
       <!-- Keyboard -->
       <div data-keyboard class="keyboard">
         <!-- FIRST ROW OF KEYS -->
