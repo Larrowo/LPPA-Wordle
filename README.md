@@ -13,3 +13,6 @@ add encryption
 
 /scoreboard page
 add scoreboard system
+
+/contact page
+add contact page

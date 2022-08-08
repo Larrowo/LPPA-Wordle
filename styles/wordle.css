@@ -16,6 +16,7 @@ body {
   margin: 0;
   padding: 1em;
   font-size: clamp(0.5rem, 2.5vmin, 1.5rem);
+  /* overflow: hidden; */
 }
 
 main {
@@ -29,6 +30,7 @@ header {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 2em;
 }
 
 header p {
@@ -63,6 +65,17 @@ header p {
 
 .alert.hide {
   opacity: 0;
+}
+
+/* *STOPWATCH */
+
+.stopwatch {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2em;
+  font-family: "Roboto Mono", monospace;
 }
 
 /* *WORDS GRID */

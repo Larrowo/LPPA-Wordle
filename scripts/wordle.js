@@ -1,15 +1,22 @@
 // Local json import
 import PALABRAS from "/palabras.json" assert { type: "json" };
 
+// Import functions from stopwatch.js
+import { startTimer, stopTimer, resetTimer } from "./stopwatch.js";
+
+//Global variables
 const WORD_LENGTH = 5;
 const FLIP_ANIMATION_DURATION = 500;
 const DANCE_ANIMATION_DURATION = 500;
-const targetWord = PALABRAS[Math.floor(Math.random() * PALABRAS.length)];
+
+const targetWord = getRandomWord();
 console.log(targetWord);
 const guessGrid = document.querySelector("[data-guess-grid]");
 const alertContainer = document.querySelector("[data-alert-container]");
 const keyboard = document.querySelector("[data-keyboard]");
+
 startInteraction();
+startTimer();
 
 /**
  * Starts the interaction with the game by adding
@@ -98,6 +105,7 @@ function pressKey(key) {
   nextTile.dataset.state = "active";
 }
 
+//TODO: ADD COMMENTS
 function deleteKey() {
   const activeTiles = getActiveTiles();
   const lastTile = activeTiles[activeTiles.length - 1];
@@ -107,6 +115,7 @@ function deleteKey() {
   delete lastTile.dataset.letter;
 }
 
+//TODO: ADD COMMENTS
 function submitGuess() {
   const activeTiles = [...getActiveTiles()];
   if (activeTiles.length !== WORD_LENGTH) {
@@ -129,6 +138,7 @@ function submitGuess() {
   activeTiles.forEach((...params) => flipTiles(...params, guess));
 }
 
+//TODO: ADD COMMENTS
 function showAlert(message, duration = 1000) {
   const alert = document.createElement("div");
   alert.textContent = message;
@@ -143,6 +153,7 @@ function showAlert(message, duration = 1000) {
   }, duration);
 }
 
+//TODO: ADD COMMENTS
 function flipTiles(tile, index, array, guess) {
   const letter = tile.dataset.letter;
   const key = keyboard.querySelector(`[data-key="${letter}"i]`);
@@ -176,6 +187,7 @@ function flipTiles(tile, index, array, guess) {
   });
 }
 
+//TODO: ADD COMMENTS
 function shakeTiles(tiles) {
   tiles.forEach((tile) => {
     tile.classList.add("shake");
@@ -189,6 +201,7 @@ function shakeTiles(tiles) {
   });
 }
 
+//TODO: ADD COMMENTS
 function checkWinLose(guess, tiles) {
   if (guess === targetWord) {
     showAlert("¡You win!", 5000);
@@ -203,11 +216,12 @@ function checkWinLose(guess, tiles) {
   console.log(remainingTiles);
   if (remainingTiles.length === 0) {
     showAlert("FRACASADO DEL ORTO", null);
-    showAlert("The word was" + targetWord.toUpperCase(), null);
+    showAlert("The word was " + targetWord.toUpperCase(), null);
     stopInteraction();
   }
 }
 
+//TODO: ADD COMMENTS
 function danceTiles(tiles) {
   tiles.forEach((tile, index) => {
     setTimeout(() => {
@@ -224,8 +238,12 @@ function danceTiles(tiles) {
 }
 
 /**
- * @returns All the tiles that have the date attribute of "active""
+ * @returns All the tiles that have the data attribute of "active""
  */
 function getActiveTiles() {
   return guessGrid.querySelectorAll('[data-state="active"]');
+}
+
+function getRandomWord() {
+  return PALABRAS[Math.floor(Math.random() * PALABRAS.length)];
 }

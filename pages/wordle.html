@@ -5,8 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/wordle.css" />
+    <script type="module" src="/scripts/stopwatch.js" defer></script>
   </head>
 
   <body>
@@ -16,7 +21,11 @@
       </div>
     </header>
     <main>
+      <!-- Alert container -->
       <div class="alert-container" data-alert-container=""></div>
+
+      <!-- Stopwatch -->
+      <div data-stopwatch class="stopwatch">00:00</div>
       <!-- Game grid -->
       <div data-guess-grid class="grid">
         <div class="words-row">
