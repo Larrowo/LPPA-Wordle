@@ -1,31 +1,56 @@
+//import functions from wordle.js
 import { showAlert, shakeTiles, targetWord } from "./wordle.js";
+//import local JSON file
 import PALABRAS from "/palabras.json" assert { type: "json" };
+//import functions from stopwatch.js
+import { startTimer, resetTimer } from "./stopwatch.js";
 
+//get elements from DOM
 const saveButton = document.querySelector("[data-save-button]");
 const loadButton = document.querySelector("[data-load-button]");
 const guessGrid = document.querySelector("[data-guess-grid]");
 const stopwatch = document.querySelector("[data-stopwatch]");
 
+/**
+ * Event listener for "click" on save button
+ */
 saveButton.addEventListener("click", (e) => {
   e.preventDefault();
   saveGame();
 });
 
+/**
+ * Event listener for "click" on load button
+ */
+loadButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  loadGame();
+});
+
+/**
+ *
+ * @returns the list of tiles that have one of the mentioned states
+ */
 function getTilesForSave() {
   return guessGrid.querySelectorAll(
     '[data-state="active"], [data-state="wrong"], [data-state="wrong-location"], [data-state="correct"]'
   );
 }
 
-loadButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  loadGame();
-});
-
+/**
+ * This functions saves the state of the game
+ * and validates if the game can be save with the
+ * inputs given by the player
+ *
+ *
+ * saves the letters and the states of each letter in 2 arrays
+ *
+ * Also stores the name of the player, the time past and the winning
+ * word in that moment
+ */
 function saveGame() {
   let activeTiles = [...getTilesForSave()];
 
-  console.log(activeTiles);
   const words = [];
   const states = [];
   for (let index = 0; index < activeTiles.length; index++) {
@@ -77,18 +102,12 @@ function loadGame() {
     nextTile.textContent = file.words[index];
     nextTile.dataset.state = file.states[index];
   }
+
+  targetWord = file.targetWord;
+
+  let timeLapsed = file.time.substring(3) * 1000;
+
+  console.log(timeLapsed);
+  resetTimer(0, file.time);
+  startTimer(timeLapsed);
 }
-
-// function saveGameState() {
-//     let file = {
-//         user: user,
-//         guessesRemaining: guessesRemaining,
-//         rightGuessString: rightGuessString,
-//         guessesMatrix: guessesMatrix,
-//         colorMatrix: colorMatrix
-//     }
-//     let saveStateString = JSON.stringify(file)
-//     localStorage.setItem(saveGame${user}, saveStateString)
-// }
-
-// var loadFile = JSON.parse(localStorage.getItem(saveGame${user}))
