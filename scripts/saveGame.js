@@ -2,12 +2,9 @@
 import { showAlert, shakeTiles, targetWord } from "./wordle.js";
 //import local JSON file
 import PALABRAS from "/palabras.json" assert { type: "json" };
-//import functions from stopwatch.js
-import { startTimer, resetTimer } from "./stopwatch.js";
 
 //get elements from DOM
 const saveButton = document.querySelector("[data-save-button]");
-const loadButton = document.querySelector("[data-load-button]");
 const guessGrid = document.querySelector("[data-guess-grid]");
 const stopwatch = document.querySelector("[data-stopwatch]");
 
@@ -17,14 +14,6 @@ const stopwatch = document.querySelector("[data-stopwatch]");
 saveButton.addEventListener("click", (e) => {
   e.preventDefault();
   saveGame();
-});
-
-/**
- * Event listener for "click" on load button
- */
-loadButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  loadGame();
 });
 
 /**
@@ -49,6 +38,10 @@ function getTilesForSave() {
  * word in that moment
  */
 function saveGame() {
+  let savedGames = [];
+  if (JSON.parse(localStorage.savedGames)) {
+    savedGames = JSON.parse(localStorage.savedGames);
+  }
   let activeTiles = [...getTilesForSave()];
 
   const words = [];
@@ -60,25 +53,19 @@ function saveGame() {
   console.log(words);
   console.log(states);
 
-  const guess = activeTiles.reduce((word, tile) => {
+  let guess = activeTiles.reduce((word, tile) => {
     return word + tile.dataset.letter;
   }, "");
 
+  if (guess.length > 5) {
+    guess = guess.slice(-5);
+  }
+
+  console.log(guess);
+  console.log(guess.length);
   const remainingTiles = guessGrid.querySelectorAll(
     ":not(.words-row):not([data-letter])"
   );
-
-  console.log(remainingTiles.length);
-
-  let file = {
-    name: localStorage.userName,
-    words: words,
-    states: states,
-    time: stopwatch.innerHTML,
-    targetWord: targetWord,
-  };
-
-  console.log(file);
 
   if (activeTiles.length === 0) {
     showAlert("You can't save an empty attempt");
@@ -86,28 +73,16 @@ function saveGame() {
     showAlert("You can't save a word that's not included");
     shakeTiles(activeTiles);
   } else {
-    localStorage.setItem("savedGame", JSON.stringify(file));
+    let file = {
+      name: localStorage.userName,
+      words: words,
+      states: states,
+      time: stopwatch.innerHTML,
+      targetWord: targetWord,
+    };
+
+    savedGames.push(file);
+    console.log(file);
+    localStorage.setItem("savedGames", JSON.stringify(savedGames));
   }
-}
-
-function loadGame() {
-  let file = JSON.parse(localStorage.getItem("savedGame"));
-
-  for (let index = 0; index < file.words.length; index++) {
-    const nextTile = guessGrid.querySelector(
-      ":not(.words-row):not([data-letter])"
-    );
-    nextTile.dataset.letter = file.words[index];
-    console.log(file.words[index]);
-    nextTile.textContent = file.words[index];
-    nextTile.dataset.state = file.states[index];
-  }
-
-  targetWord = file.targetWord;
-
-  let timeLapsed = file.time.substring(3) * 1000;
-
-  console.log(timeLapsed);
-  resetTimer(0, file.time);
-  startTimer(timeLapsed);
 }

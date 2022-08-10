@@ -118,7 +118,6 @@ function pressKey(key) {
 }
 
 /**
- *
  * Deletes the content of the last active tile
  *
  * reset it datasets

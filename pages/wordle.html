@@ -11,14 +11,17 @@
     />
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/wordle.css" />
+    <link rel="stylesheet" href="/styles/modal.css" />
     <script type="module" src="/scripts/stopwatch.js" defer></script>
     <script type="module" src="/scripts/saveGame.js"></script>
+    <script type="module" src="/scripts/loadGameModal.js"></script>
   </head>
 
   <body>
     <header>
       <div>
         <p>WORDLE</p>
+        <button class="headerButton">CONTACT US</button>
       </div>
     </header>
     <main>
@@ -82,8 +85,30 @@
 
       <!-- LOAD BUTTON TEST -->
       <div class="loadButton-container">
-        <button data-load-button class="saveButton">LOAD GAME</button>
+        <button data-load-button data-modal-target="#modal" class="saveButton">
+          LOAD GAME
+        </button>
       </div>
+      <!-- Info Modal -->
+      <div class="modal" id="modal">
+        <div class="modalHeader">
+          <div class="tittle">Load Game</div>
+          <button data-close-button class="closeButton">&times</button>
+        </div>
+        <div class="modalBody">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia,
+          maiores adipisci. Molestiae quod cumque omnis fuga optio perferendis
+          ipsam maxime soluta nam? Dolorem, magnam placeat itaque et aliquam
+          suscipit beatae accusamus vel assumenda molestias aliquid eligendi
+          laborum id corrupti laboriosam nostrum quasi officia soluta asperiores
+          maiores neque porro. Deserunt reprehenderit autem earum laborum animi
+          alias ipsa sint repudiandae, doloremque magni sed, fuga quaerat
+          facere! At, eius. Hic, sed omnis est qui accusamus iusto quibusdam
+          culpa doloremque dolorem corporis nobis veritatis.
+        </div>
+      </div>
+      <div id="overlay"></div>
+
       <!-- Keyboard -->
       <div data-keyboard class="keyboard">
         <!-- FIRST ROW OF KEYS -->
@@ -138,7 +163,7 @@
         </div>
       </div>
     </main>
-    <footer></footer>
+    <footer>THIS IS A FOOTER</footer>
     <script type="module" src="/scripts/wordle.js" defer></script>
   </body>
 </html>
