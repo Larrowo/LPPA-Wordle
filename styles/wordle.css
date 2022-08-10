@@ -17,7 +17,6 @@ body {
   margin: 0;
   padding: 1em;
   font-size: clamp(0.5rem, 2.5vmin, 1.5rem);
-  /* overflow: hidden; */
 }
 
 main {
@@ -30,13 +29,28 @@ main {
 header {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+
   flex-direction: row;
   margin-bottom: 2em;
 }
 
 header p {
   color: white;
+  font-size: 2em;
+  font-family: "roboto mono", monospace;
+}
+
+.headerButton {
+  color: white;
+  background-color: #111112;
+  border: 1px white solid;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: inherit;
+  border-radius: 0.25em;
+  cursor: pointer;
+  font-family: "Roboto Mono", monospace;
 }
 
 /* *ALERT */
@@ -307,5 +321,5 @@ header p {
 
 footer {
   color: white;
-  font-family: "Roboto Mono", monospace;
+  font-family: "roboto monospace", monospace;
 }

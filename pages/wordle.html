@@ -19,10 +19,13 @@
 
   <body>
     <header>
-      <div>
-        <p>WORDLE</p>
-        <button class="headerButton">CONTACT US</button>
-      </div>
+      <a href="https://github.com/Larrowo/LPPA-Wordle"
+        ><button class="headerButton">GO TO GITHUB</button></a
+      >
+      <p>WORDLE</p>
+      <a href="/pages/contactPage.html"
+        ><button class="headerButton">CONTACT US</button></a
+      >
     </header>
     <main>
       <!-- Alert container -->
@@ -96,15 +99,14 @@
           <button data-close-button class="closeButton">&times</button>
         </div>
         <div class="modalBody">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia,
-          maiores adipisci. Molestiae quod cumque omnis fuga optio perferendis
-          ipsam maxime soluta nam? Dolorem, magnam placeat itaque et aliquam
-          suscipit beatae accusamus vel assumenda molestias aliquid eligendi
-          laborum id corrupti laboriosam nostrum quasi officia soluta asperiores
-          maiores neque porro. Deserunt reprehenderit autem earum laborum animi
-          alias ipsa sint repudiandae, doloremque magni sed, fuga quaerat
-          facere! At, eius. Hic, sed omnis est qui accusamus iusto quibusdam
-          culpa doloremque dolorem corporis nobis veritatis.
+          <table id="myTable">
+            <thead>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Time</th>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
         </div>
       </div>
       <div id="overlay"></div>

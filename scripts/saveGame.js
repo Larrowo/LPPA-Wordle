@@ -38,21 +38,7 @@ function getTilesForSave() {
  * word in that moment
  */
 function saveGame() {
-  let savedGames = [];
-  if (JSON.parse(localStorage.savedGames)) {
-    savedGames = JSON.parse(localStorage.savedGames);
-  }
   let activeTiles = [...getTilesForSave()];
-
-  const words = [];
-  const states = [];
-  for (let index = 0; index < activeTiles.length; index++) {
-    words[index] = activeTiles[index].innerHTML;
-    states[index] = activeTiles[index].dataset.state;
-  }
-  console.log(words);
-  console.log(states);
-
   let guess = activeTiles.reduce((word, tile) => {
     return word + tile.dataset.letter;
   }, "");
@@ -73,16 +59,53 @@ function saveGame() {
     showAlert("You can't save a word that's not included");
     shakeTiles(activeTiles);
   } else {
-    let file = {
+    localStorage.setItem("savedGames", JSON.stringify(generateFile()));
+  }
+}
+
+function generateFile() {
+  let savedGames = [];
+  if (localStorage.savedGames) {
+    savedGames = JSON.parse(localStorage.savedGames);
+  }
+
+  let playerGames = [];
+  savedGames.forEach((element) => {
+    if (element.name === localStorage.userName) {
+      playerGames.push(element);
+    }
+  });
+
+  let activeTiles = [...getTilesForSave()];
+  const words = [];
+  const states = [];
+  for (let index = 0; index < activeTiles.length; index++) {
+    words[index] = activeTiles[index].innerHTML;
+    states[index] = activeTiles[index].dataset.state;
+  }
+  console.log(words);
+  console.log(states);
+  let file;
+  if (playerGames.length == 0) {
+    file = {
+      id: 1,
       name: localStorage.userName,
       words: words,
       states: states,
       time: stopwatch.innerHTML,
       targetWord: targetWord,
     };
-
-    savedGames.push(file);
-    console.log(file);
-    localStorage.setItem("savedGames", JSON.stringify(savedGames));
+  } else {
+    file = {
+      id: playerGames.length + 1,
+      name: localStorage.userName,
+      words: words,
+      states: states,
+      time: stopwatch.innerHTML,
+      targetWord: targetWord,
+    };
   }
+  savedGames.push(file);
+  console.log(file);
+  return savedGames;
 }

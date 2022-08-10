@@ -2,7 +2,7 @@
 import PALABRAS from "/palabras.json" assert { type: "json" };
 
 // Import functions from stopwatch.js
-import { startTimer, stopTimer, resetTimer } from "./stopwatch.js";
+import { startTimer, stopTimer } from "./stopwatch.js";
 
 //Global variables
 const WORD_LENGTH = 5;
@@ -11,6 +11,9 @@ const DANCE_ANIMATION_DURATION = 500;
 
 //random word from the JSON file
 export let targetWord = getRandomWord();
+export function modifyTargetWord(target) {
+  targetWord = target;
+}
 console.log(targetWord);
 // Get elements from DOM
 const guessGrid = document.querySelector("[data-guess-grid]");
@@ -266,7 +269,6 @@ function checkWinLose(guess, tiles) {
     danceTiles(tiles);
     stopInteraction();
     return;
-    localStorage.removeItem("");
   }
 
   const remainingTiles = guessGrid.querySelectorAll(

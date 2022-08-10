@@ -74,6 +74,18 @@ form label input {
   width: 70%;
 }
 
+form label textarea {
+  background-color: rgb(70, 69, 69);
+  outline: none;
+  border: none;
+  color: black;
+  text-align: center;
+  border-bottom: solid 1px #000000;
+  padding: 0 5px;
+  font-size: inherit;
+  width: 70%;
+}
+
 form button {
   color: white;
   border: none;
@@ -85,4 +97,8 @@ form button {
 ::placeholder {
   color: rgb(24, 23, 23);
   font-weight: 800;
+}
+
+#message {
+  box-sizing: border-box;
 }
