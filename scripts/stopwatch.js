@@ -1,9 +1,9 @@
 const stopwatch = document.querySelector("[data-stopwatch]");
 
 let stopwatchInterval;
-let runningTime = 0;
+// let runningTime = 0;
 
-function startTimer() {
+function startTimer(runningTime) {
   let startTime = Date.now() - runningTime;
 
   stopwatchInterval = setInterval(() => {
@@ -16,10 +16,10 @@ function stopTimer() {
   clearInterval(stopwatchInterval);
 }
 
-function resetTimer() {
+function resetTimer(runningTime, clock) {
   runningTime = 0;
   clearInterval(stopwatchInterval);
-  stopwatch.textContent = "00:00";
+  stopwatch.textContent = clock;
 }
 
 function calculateTime(runningTime) {

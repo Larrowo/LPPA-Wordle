@@ -12,11 +12,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   min-height: 100vh;
   margin: 0;
   padding: 1em;
   font-size: clamp(0.5rem, 2.5vmin, 1.5rem);
-  /* overflow: hidden; */
 }
 
 main {
@@ -29,12 +29,28 @@ main {
 header {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+
+  flex-direction: row;
   margin-bottom: 2em;
 }
 
 header p {
   color: white;
+  font-size: 2em;
+  font-family: "roboto mono", monospace;
+}
+
+.headerButton {
+  color: white;
+  background-color: #111112;
+  border: 1px white solid;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: inherit;
+  border-radius: 0.25em;
+  cursor: pointer;
+  font-family: "Roboto Mono", monospace;
 }
 
 /* *ALERT */
@@ -196,6 +212,45 @@ header p {
   background-color: hsl(115, 29%, 43%);
 }
 
+/* *SAVE GAME BUTTON */
+
+.saveButton-container {
+  margin-bottom: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.saveButton-container button {
+  color: white;
+  background-color: #111112;
+  border: 1px white solid;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: inherit;
+  border-radius: 0.25em;
+  cursor: pointer;
+  font-family: "Roboto Mono", monospace;
+}
+
+.loadButton-container {
+  margin-bottom: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadButton-container button {
+  color: white;
+  background-color: #111112;
+  border: 1px white solid;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: inherit;
+  border-radius: 0.25em;
+  cursor: pointer;
+  font-family: "Roboto Mono", monospace;
+}
 /* *KEYBOARD */
 
 .keyboard {
@@ -204,6 +259,7 @@ header p {
   flex-direction: column;
   align-items: center;
   gap: 0.25em;
+  margin-bottom: 0.4em;
 }
 
 .keyboard-row {
@@ -259,4 +315,11 @@ header p {
   --hue: 115;
   --saturation: 29%;
   --lightness: 43%;
+}
+
+/* *FOOTER */
+
+footer {
+  color: white;
+  font-family: "roboto monospace", monospace;
 }

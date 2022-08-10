@@ -3,9 +3,8 @@
 # TODOS
 
 /wordle page
-add timer
 add score system
-add game saving system
+refine game saving system
 
 /default page
 add user logIn

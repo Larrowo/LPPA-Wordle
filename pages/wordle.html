@@ -11,14 +11,21 @@
     />
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/wordle.css" />
+    <link rel="stylesheet" href="/styles/modal.css" />
     <script type="module" src="/scripts/stopwatch.js" defer></script>
+    <script type="module" src="/scripts/saveGame.js"></script>
+    <script type="module" src="/scripts/loadGameModal.js"></script>
   </head>
 
   <body>
     <header>
-      <div>
-        <p>TESTING</p>
-      </div>
+      <a href="https://github.com/Larrowo/LPPA-Wordle"
+        ><button class="headerButton">GO TO GITHUB</button></a
+      >
+      <p>WORDLE</p>
+      <a href="/pages/contactPage.html"
+        ><button class="headerButton">CONTACT US</button></a
+      >
     </header>
     <main>
       <!-- Alert container -->
@@ -74,6 +81,35 @@
           <div class="tile"></div>
         </div>
       </div>
+      <!-- Save Button -->
+      <div class="saveButton-container">
+        <button data-save-button class="saveButton">SAVE GAME</button>
+      </div>
+
+      <!-- LOAD BUTTON TEST -->
+      <div class="loadButton-container">
+        <button data-load-button data-modal-target="#modal" class="saveButton">
+          LOAD GAME
+        </button>
+      </div>
+      <!-- Info Modal -->
+      <div class="modal" id="modal">
+        <div class="modalHeader">
+          <div class="tittle">Load Game</div>
+          <button data-close-button class="closeButton">&times</button>
+        </div>
+        <div class="modalBody">
+          <table id="myTable">
+            <thead>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Time</th>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="overlay"></div>
 
       <!-- Keyboard -->
       <div data-keyboard class="keyboard">
@@ -129,7 +165,7 @@
         </div>
       </div>
     </main>
-    <footer></footer>
+    <footer>THIS IS A FOOTER</footer>
     <script type="module" src="/scripts/wordle.js" defer></script>
   </body>
 </html>
