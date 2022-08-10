@@ -10,7 +10,8 @@ const FLIP_ANIMATION_DURATION = 500;
 const DANCE_ANIMATION_DURATION = 500;
 
 //random word from the JSON file
-export let targetWord = getRandomWord();
+// export let targetWord = getRandomWord();
+export let targetWord = "sorda";
 export function modifyTargetWord(target) {
   targetWord = target;
 }
@@ -20,6 +21,7 @@ const guessGrid = document.querySelector("[data-guess-grid]");
 const alertContainer = document.querySelector("[data-alert-container]");
 const keyboard = document.querySelector("[data-keyboard]");
 const playerName = document.querySelector("[data-player-name]");
+var temp = "";
 
 //starts the interaction
 startInteraction();
@@ -160,6 +162,7 @@ function submitGuess() {
 
   stopInteraction();
   activeTiles.forEach((...params) => flipTiles(...params, guess));
+  temp = "";
 }
 
 /**
@@ -209,11 +212,18 @@ function flipTiles(tile, index, array, guess) {
   tile.addEventListener("transitionend", () => {
     tile.classList.remove("flip");
     if (targetWord[index] === letter) {
+      temp += letter;
       tile.dataset.state = "correct";
       key.classList.add("correct");
     } else if (targetWord.includes(letter)) {
-      tile.dataset.state = "wrong-location";
-      key.classList.add("wrong-location");
+      if (temp.split(letter).length < targetWord.split(letter).length) {
+        tile.dataset.state = "wrong-location";
+        key.classList.add("wrong-location");
+        temp += letter;
+      } else {
+        tile.dataset.state = "wrong";
+        key.classList.add("wrong");
+      }
     } else {
       tile.dataset.state = "wrong";
       key.classList.add("wrong");
